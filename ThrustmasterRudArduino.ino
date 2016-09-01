@@ -10,7 +10,6 @@ Button btn4(5);
 boolean modBtnPressed = false;
 
 void setup() {
-  Serial.begin(9600);
   pinMode(2, INPUT_PULLUP);
   pinMode(3, INPUT_PULLUP);
   pinMode(4, INPUT_PULLUP);
@@ -44,6 +43,18 @@ void loop() {
   int ax1 = analogRead(A0); //(20 - 900)
   int ax1val = map(ax1, 20, 900, 0, 255);
   Joystick.setThrottle(255 - ax1val);
+
+//  int ax2 = analogRead(A1); //(0 - 1023)
+//  int ax2val = map(ax2, 0, 1023, 0, 255);
+//  if (ax2val < 5) {
+//    Joystick.pressButton(7);
+//  } else if (ax2val > 235) {
+//    Joystick.pressButton(6);
+//  } else {
+//    Joystick.releaseButton(6);  
+//    Joystick.releaseButton(7); 
+//  }
+  
 }
 
 void onBtn1Press(Button &btn) {
