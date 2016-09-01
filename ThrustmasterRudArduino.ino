@@ -44,57 +44,57 @@ void loop() {
   int ax1val = map(ax1, 20, 900, 0, 255);
   Joystick.setThrottle(255 - ax1val);
 
-//  int ax2 = analogRead(A1); //(0 - 1023)
-//  int ax2val = map(ax2, 0, 1023, 0, 255);
-//  if (ax2val < 5) {
-//    Joystick.pressButton(7);
-//  } else if (ax2val > 235) {
-//    Joystick.pressButton(6);
-//  } else {
-//    Joystick.releaseButton(6);  
-//    Joystick.releaseButton(7); 
-//  }
-  
+  //  int ax2 = analogRead(A1); //(0 - 1023)
+  //  int ax2val = map(ax2, 0, 1023, 0, 255);
+  //  if (ax2val < 5) {
+  //    Joystick.pressButton(7);
+  //  } else if (ax2val > 235) {
+  //    Joystick.pressButton(6);
+  //  } else {
+  //    Joystick.releaseButton(6);
+  //    Joystick.releaseButton(7);
+  //  }
+
 }
 
 void onBtn1Press(Button &btn) {
   if (modBtnPressed) {
-    Joystick.pressButton(3);  
+    Joystick.pressButton(3);
   } else {
-    Joystick.pressButton(0);  
+    Joystick.pressButton(0);
   }
-  
+
 }
 
 void onBtn1UnPress(Button &btn) {
-    Joystick.releaseButton(3);  
-    Joystick.releaseButton(0);  
+  Joystick.releaseButton(3);
+  Joystick.releaseButton(0);
 }
 
 void onBtn2Press(Button &btn) {
   if (modBtnPressed) {
-    Joystick.pressButton(4);  
+    Joystick.pressButton(4);
   } else {
-    Joystick.pressButton(1);  
+    Joystick.pressButton(1);
   }
 }
 
 void onBtn2UnPress(Button &btn) {
-    Joystick.releaseButton(4);  
-    Joystick.releaseButton(1);    
+  Joystick.releaseButton(4);
+  Joystick.releaseButton(1);
 }
 
 void onBtn3Press(Button &btn) {
   if (modBtnPressed) {
-    Joystick.pressButton(5);  
+    Joystick.pressButton(5);
   } else {
-    Joystick.pressButton(2);  
+    Joystick.pressButton(2);
   }
 }
 
 void onBtn3UnPress(Button &btn) {
-    Joystick.releaseButton(5);  
-    Joystick.releaseButton(2);  
+  Joystick.releaseButton(5);
+  Joystick.releaseButton(2);
 }
 
 void onBtn4Press(Button &btn) {
@@ -103,7 +103,7 @@ void onBtn4Press(Button &btn) {
 
 void onBtn4UnPress(Button &btn) {
   modBtnPressed = false;
-  
+
 }
 
 
