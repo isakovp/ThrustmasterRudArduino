@@ -61,6 +61,7 @@ void onBtn1UnPress(Button &btn) {
   } else {
     Joystick.releaseButton(0);  
   }
+  modBtnPressed = false;
 }
 
 void onBtn2Press(Button &btn) {
@@ -77,6 +78,7 @@ void onBtn2UnPress(Button &btn) {
   } else {
     Joystick.releaseButton(1);  
   }
+  modBtnPressed = false;
 }
 
 void onBtn3Press(Button &btn) {
@@ -93,6 +95,7 @@ void onBtn3UnPress(Button &btn) {
   } else {
     Joystick.releaseButton(2);  
   }
+  modBtnPressed = false;
 }
 
 void onBtn4Press(Button &btn) {
