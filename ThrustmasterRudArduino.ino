@@ -56,12 +56,8 @@ void onBtn1Press(Button &btn) {
 }
 
 void onBtn1UnPress(Button &btn) {
-  if (modBtnPressed) {
     Joystick.releaseButton(3);  
-  } else {
     Joystick.releaseButton(0);  
-  }
-  modBtnPressed = false;
 }
 
 void onBtn2Press(Button &btn) {
@@ -73,12 +69,8 @@ void onBtn2Press(Button &btn) {
 }
 
 void onBtn2UnPress(Button &btn) {
-  if (modBtnPressed) {
     Joystick.releaseButton(4);  
-  } else {
-    Joystick.releaseButton(1);  
-  }
-  modBtnPressed = false;
+    Joystick.releaseButton(1);    
 }
 
 void onBtn3Press(Button &btn) {
@@ -90,31 +82,15 @@ void onBtn3Press(Button &btn) {
 }
 
 void onBtn3UnPress(Button &btn) {
-  if (modBtnPressed) {
     Joystick.releaseButton(5);  
-  } else {
     Joystick.releaseButton(2);  
-  }
-  modBtnPressed = false;
 }
 
 void onBtn4Press(Button &btn) {
-  Joystick.releaseButton(0); 
-  Joystick.releaseButton(1); 
-  Joystick.releaseButton(2);
-  Joystick.releaseButton(3);
-  Joystick.releaseButton(4);
-  Joystick.releaseButton(5); 
   modBtnPressed = true;
 }
 
 void onBtn4UnPress(Button &btn) {
-  Joystick.releaseButton(0); 
-  Joystick.releaseButton(1); 
-  Joystick.releaseButton(2);
-  Joystick.releaseButton(3);
-  Joystick.releaseButton(4);
-  Joystick.releaseButton(5); 
   modBtnPressed = false;
   
 }
