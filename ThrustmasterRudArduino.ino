@@ -1,109 +1,89 @@
 #include "Joystick.h"
 #include "Button.h"
 
+#define btn1Pin 2
+#define btn2Pin 3
+#define btn3Pin 4
+#define btn4Pin 5
+#define ax1Pin A0
+#define ax2Pin A1
 
-Button btn1(2);
-Button btn2(3);
-Button btn3(4);
-Button btn4(5);
+Button btn1(btn1Pin);
+Button btn2(btn2Pin);
+Button btn3(btn3Pin);
+Button btn4(btn4Pin);
 
 boolean modBtnPressed = false;
 
 void setup() {
-  pinMode(2, INPUT_PULLUP);
-  pinMode(3, INPUT_PULLUP);
-  pinMode(4, INPUT_PULLUP);
-  pinMode(5, INPUT_PULLUP);
+  pinMode(btn1Pin, INPUT_PULLUP);
+  pinMode(btn2Pin, INPUT_PULLUP);
+  pinMode(btn3Pin, INPUT_PULLUP);
+  pinMode(btn4Pin, INPUT_PULLUP);
 
-  pinMode(A0, INPUT);
-  pinMode(A1, INPUT);
+  pinMode(ax1Pin, INPUT);
 
   Joystick.begin();
-  btn1.setPressHandler(onBtn1Press);
-  btn1.setUnPressHandler(onBtn1UnPress);
+  btn1.setPressHandler(onBtnPress);
+  btn1.setUnPressHandler(onBtnUnPress);
 
-  btn2.setPressHandler(onBtn2Press);
-  btn2.setUnPressHandler(onBtn2UnPress);
+  btn2.setPressHandler(onBtnPress);
+  btn2.setUnPressHandler(onBtnUnPress);
 
-  btn3.setPressHandler(onBtn3Press);
-  btn3.setUnPressHandler(onBtn3UnPress);
+  btn3.setPressHandler(onBtnPress);
+  btn3.setUnPressHandler(onBtnUnPress);
 
-  btn4.setPressHandler(onBtn4Press);
-  btn4.setUnPressHandler(onBtn4UnPress);
+  btn4.setPressHandler(onBtnPress);
+  btn4.setUnPressHandler(onBtnUnPress);
+
+  btn4.setPressHandler(onModBtnPress);
+  btn4.setUnPressHandler(onModBtnUnPress);
+
+  btn4.setClickHandler(onModBtnClick);  
 }
 
 
 void loop() {
-
   btn1.scan();
   btn2.scan();
   btn3.scan();
   btn4.scan();
 
-  int ax1 = analogRead(A0); //(20 - 900)
-  int ax1val = map(ax1, 20, 900, 0, 255);
-  Joystick.setThrottle(255 - ax1val);
+  int ax1 = analogRead(ax1Pin); //(20 - 900)
+  int ax1val = map(ax1, 20, 900, 255, 0);
+  Joystick.setThrottle(ax1val);
 
-  //  int ax2 = analogRead(A1); //(0 - 1023)
-  //  int ax2val = map(ax2, 0, 1023, 0, 255);
-  //  if (ax2val < 5) {
-  //    Joystick.pressButton(7);
-  //  } else if (ax2val > 235) {
-  //    Joystick.pressButton(6);
-  //  } else {
-  //    Joystick.releaseButton(6);
-  //    Joystick.releaseButton(7);
-  //  }
-
+  int ax2 = analogRead(ax2Pin); //(0 - 1023)
+  int ax2val = map(ax2, 0, 1023, 255, 0);
+  Joystick.setRudder(ax2val);
 }
 
-void onBtn1Press(Button &btn) {
+void onBtnPress(Button &btn) {
   if (modBtnPressed) {
-    Joystick.pressButton(3);
+    Joystick.pressButton(btn.getPin() + 1);
   } else {
-    Joystick.pressButton(0);
+    Joystick.pressButton(btn.getPin() - 2);
   }
 
 }
 
-void onBtn1UnPress(Button &btn) {
-  Joystick.releaseButton(3);
-  Joystick.releaseButton(0);
+void onBtnUnPress(Button &btn) {
+  Joystick.releaseButton(btn.getPin() + 1);
+  Joystick.releaseButton(btn.getPin() - 2);
 }
 
-void onBtn2Press(Button &btn) {
-  if (modBtnPressed) {
-    Joystick.pressButton(4);
-  } else {
-    Joystick.pressButton(1);
-  }
-}
-
-void onBtn2UnPress(Button &btn) {
-  Joystick.releaseButton(4);
-  Joystick.releaseButton(1);
-}
-
-void onBtn3Press(Button &btn) {
-  if (modBtnPressed) {
-    Joystick.pressButton(5);
-  } else {
-    Joystick.pressButton(2);
-  }
-}
-
-void onBtn3UnPress(Button &btn) {
-  Joystick.releaseButton(5);
-  Joystick.releaseButton(2);
-}
-
-void onBtn4Press(Button &btn) {
+void onModBtnPress(Button &btn) {
   modBtnPressed = true;
 }
 
-void onBtn4UnPress(Button &btn) {
+void onModBtnUnPress(Button &btn) {
   modBtnPressed = false;
+}
 
+void onModBtnClick(Button &btn) {
+  Joystick.pressButton(6);
+  delay(100);
+  Joystick.releaseButton(6);
 }
 
 
