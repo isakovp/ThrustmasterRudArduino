@@ -39,7 +39,7 @@ void setup() {
   btn4.setPressHandler(onModBtnPress);
   btn4.setUnPressHandler(onModBtnUnPress);
 
-  btn4.setClickHandler(onModBtnClick);  
+  btn4.setClickHandler(onModBtnClick);
 }
 
 
@@ -54,8 +54,16 @@ void loop() {
   Joystick.setThrottle(ax1val);
 
   int ax2 = analogRead(ax2Pin); //(0 - 1023)
-  int ax2val = map(ax2, 0, 1023, 255, 0);
-  Joystick.setRudder(ax2val);
+  if (modBtnPressed) {
+    int ax2val = map(ax2, 0, 1023, 0, 360);
+    Joystick.setXAxisRotation(ax2val);
+    Joystick.setRudder(127);
+  } else {
+    int ax2val = map(ax2, 0, 1023, 255, 0);
+    Joystick.setRudder(ax2val);
+    Joystick.setXAxisRotation(0);
+  }
+
 }
 
 void onBtnPress(Button &btn) {
