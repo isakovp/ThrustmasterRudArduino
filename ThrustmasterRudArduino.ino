@@ -55,13 +55,13 @@ void loop() {
 
   int ax2 = analogRead(ax2Pin); //(0 - 1023)
   if (modBtnPressed) {
-    int ax2val = map(ax2, 0, 1023, 0, 360);
+    int ax2val = map(ax2, 0, 1023, 360, 0);
     Joystick.setXAxisRotation(ax2val);
     Joystick.setRudder(127);
   } else {
     int ax2val = map(ax2, 0, 1023, 255, 0);
     Joystick.setRudder(ax2val);
-    Joystick.setXAxisRotation(0);
+    Joystick.setXAxisRotation(180);
   }
 
 }
